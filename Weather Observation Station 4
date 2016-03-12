@@ -1,0 +1,6 @@
+Let NUMNUM be the number of CITY entries in STATION, and NUMuniqueNUMunique be the number of unique cities.
+Query the value of NUM−NUMuniqueNUM−NUMunique from STATION.
+
+In other words, query the number of non-unique CITY names in STATION by subtracting the number of unique CITY entries in the table from the total number of CITY entries in the table.
+
+select count(*) - count(distinct city) from station;
