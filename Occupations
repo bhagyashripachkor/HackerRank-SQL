@@ -1,0 +1,12 @@
+Pivot the Occupation column in OCCUPATIONS so that each Name is sorted alphabetically and displayed underneath its corresponding Occupation. 
+The output column headers should Doctor, Professor, Singer, and Actor, respectively.
+
+/*
+Enter your query here.
+Please append a semicolon ";" at the end of the query and enter your query in a single line to avoid error.
+*/
+select Doctor,Professor,Singer,Actor 
+from (select Name,Occupation ,row_number() 
+      over(partition by Occupation order by Name) rn 
+      from Occupations) as source pivot ( max(name) 
+                                         for Occupation in (Doctor,Professor,Singer,Actor) ) as PVT;
