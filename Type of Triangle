@@ -1,0 +1,17 @@
+Write a query identifying the type of each record in the TRIANGLES table using its three side lengths. Output one of the following statements for each record in the table:
+
+Not A Triangle: The given values of A, B, and C don't form a triangle.
+Equilateral: It's a triangle with 33 sides of equal length.
+Isosceles: It's a triangle with 22 sides of equal length.
+Scalene: It's a triangle with 33 sides of differing lengths.
+
+select case 
+    when A+B<=C then 'Not A Triangle' 
+    when B+C<=A then 'Not A Triangle' 
+    when C+A<=B then 'Not A Triangle' 
+    when A=B then 
+    case 
+        when B=C then 'Equilateral' else 'Isosceles' 
+    end 
+    when B=C then 'Isosceles' 
+    when A=C then 'Isosceles' else 'Scalene' end from TRIANGLES ;
