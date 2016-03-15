@@ -1,0 +1,18 @@
+
+You are given a table, BST, containing two columns: N and P, where N represents the value of a node in BST, and P is the parent of N.
+Write a query to find the node type of BST ordered by the value of the node. Output one of the following for each node:
+
+Root: If node is root node.
+Leaf: If node is leaf node.
+Inner: If node is neither root nor leaf node.
+
+
+select distinct node.N, case 
+				when parent.P is null then 'Leaf'
+				when Parent.P is not null and child.N is not null then 'Inner'
+				else 'Root'
+end
+from BST node
+left join BST parent on node.N=parent.P
+left join BST child on node.P=child.N
+order by node.N;
