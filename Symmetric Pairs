@@ -1,0 +1,17 @@
+You are given a table, Functions, containing two columns: X and Y. Y is the value of some function F at X -- i.e. Y = F(X).
+Two pairs (X1, Y1) and (X2, Y2) are said to be symmetric pairs if X1 = Y2 and X2 = Y1.
+
+Write a query to output all such symmetric pairs in ascending order by the value of X.
+
+SELECT DISTINCT f1.x,f1.y 
+FROM   functions f1 
+       inner join functions f2 
+               ON f1.x IN f2.y 
+                  AND f1.y IN f2.x 
+WHERE  f1.x < f1.y 
+        OR f1.x IN (SELECT x 
+                   FROM   functions 
+                   WHERE  x = y 
+                   GROUP  BY x,y 
+                   HAVING Count(*) > 1) 
+ORDER  BY f1.x; 
